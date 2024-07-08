@@ -14,7 +14,10 @@ const downloadCSV = async (req, res) => {
       console.log("No data found for given uniqueID");
       return res.status(404).json({ error: "Data not found" });
     }
-
+    if (aggregatedProduct.status != "completed") {
+      console.log("Please wait some more Time.Your File Is under Process");
+      return res.status(404).json({ error: "File Is Under Processing" });
+    }
     // Extract all products from the nested structure
     const allProducts = [];
 
