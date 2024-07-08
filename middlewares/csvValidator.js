@@ -26,6 +26,7 @@ const validateCSV = (req, res, next) => {
   // On finish, attach the parsed records to the request object and proceed to the next middleware
   writableStream.on("finish", () => {
     req.csvRecords = records; // Attach records to the request object
+    // console.log(records);
     next(); // Proceed to the next middleware
   });
 

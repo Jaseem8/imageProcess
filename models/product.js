@@ -4,25 +4,28 @@ const Schema = mongoose.Schema;
 // Define the product schema
 const ProductSchema = new Schema(
   {
-    serialNumber: String,
-    products: [
-      {
-        serialNumber: String,
-        productName: String,
-        inputImageUrls: [String],
-        outputImageUrls: [String], // Add outputImageUrls to the schema
-      },
-    ],
+    serialNumber: { type: String, required: true },
+    productName: { type: String, required: true },
+    inputImageUrls: { type: [String], required: true },
+    outputImageUrls: {
+      type: [String],
+      required: true,
+      default: ["not-processed"],
+    },
   },
+
   { _id: false }
 );
 
 // Define the main schema to store aggregated products
 const AggregatedProductSchema = new Schema(
   {
+    uniqueID: { type: String, required: true },
+    status: { type: String, required: true, default: "not-processed" },
     products: {
-      type: Map,
+      type: Array,
       of: ProductSchema,
+      required: true,
     },
   },
   { timestamps: true }
