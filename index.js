@@ -25,7 +25,9 @@ mongoose.connection.on("connected", () => {
 
   // Define routes only after MongoDB connection is established
   app.use(express.json());
-
+  app.get("/", async (req, res) => {
+    res.status(200).json("Hello");
+  });
   app.use("/upload", uploadRouter); // Use the upload router for /upload path
   app.use("/status", statusRouter); // Use the status router for /status path
   app.use("/process-completed", webHookRouter); // Use the status router for /status path
